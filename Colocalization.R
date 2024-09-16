@@ -27,7 +27,7 @@ leadchr <- lead$chrom[1]
 leadstart <- as.numeric(lead$start[1])
 leadend <- as.numeric(lead$end[1])
 pQTLdata <- exposure[exposure$chrom==leadchr,]
-pQTLdata <- pQTLdata[pQTLdata$start>leadstart-1000000 & pQTLdata$end<leadend+1000000,]
+pQTLdata <- pQTLdata[pQTLdata$start>leadstart-500000 & pQTLdata$end<leadend+500000,]
 pQTLdata <- subset(pQTLdata, !duplicated(SNP))
 pQTLdata <- na.omit(pQTLdata)
 
