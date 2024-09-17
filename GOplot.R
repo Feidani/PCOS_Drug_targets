@@ -51,20 +51,19 @@ MF <- GO_MF_result[1:20,]
 CC <- GO_CC_result[1:20,]
 BP <- GO_BP_result[1:20,]
 
-MF2 <- MF
-MF2$Description <- str_trunc(MF$Description,width = 50,side = "right")
-MF2$Description
-MF2$term <- factor(MF2$Description,levels = rev(MF2$Description))
+MF$Description <- str_trunc(MF$Description,width = 50,side = "right")
+MF$Description
+MF$term <- factor(MF$Description,levels = rev(MF$Description))
 CC$term <- factor(CC$Description,levels = rev(CC$Description))
 BP$term <- factor(BP$Description,levels = rev(BP$Description))
 
-rf<- apply(MF2,1,function(x){
+rf<- apply(MF,1,function(x){
   GeneRatio <- eval(parse(text = x["GeneRatio"]))
   BgRatio <- eval(parse(text = x["BgRatio"]))
   RF<- round(GeneRatio/BgRatio,2)
   RF
 })
-MF2$Rich_Factor <- rf
+MF$Rich_Factor <- rf
 
 rf<- apply(CC,1,function(x){
   GeneRatio <- eval(parse(text = x["GeneRatio"]))
@@ -98,7 +97,7 @@ GO_dot <- function(x){
     mytheme
 }
 mytheme <- theme_minimal() 
-pp1 <- GO_dot("MF2") + scale_color_distiller(palette = "YlOrRd",direction = 1)
+pp1 <- GO_dot("MF") + scale_color_distiller(palette = "YlOrRd",direction = 1)
 pp2 <- GO_dot("CC") + scale_color_distiller(palette = "YlGnBu",direction = 1)
 pp3 <- GO_dot("BP") + scale_color_distiller(palette = "YlOrBr",direction = 1)
 setwd("~/GO_KEGG")
